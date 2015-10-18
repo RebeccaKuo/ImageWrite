@@ -11,7 +11,9 @@ CONFIG+=c++11
 # add source file
 SOURCES +=$$PWD/src/main.cpp \
         $$PWD/src/ImageWrite.cpp
+        $$PWD/src/ImageCopy.cpp
 
 HEADERS +=$$PWD/include/ImageWrite.h
+          $$PWD/include/ImageCopy.h
 
 INCLUDEPATH+= $$PWD/include
