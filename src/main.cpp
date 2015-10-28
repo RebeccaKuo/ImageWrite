@@ -5,20 +5,30 @@
 
 int main()
 {
-  std::cout<<"Working\n";
   ImageWrite my_image(400,400);
-  for(int y=0; y<400; ++y)
-  for(int x=0; x<400; ++x)
+  my_image.clear(0,0,0);
+
+  //diagonal
+  my_image.drawLine(0,0,399,399);
+  my_image.drawLine(399,0,0,399);
+
+  //horzional
+  my_image.drawLine(200,0,200,399);
+  //vertical
+  my_image.drawLine(0,200,399,200);
+
+  my_image.drawLine(100,0,300,399);
+  my_image.drawLine(300,0,100,399);
+  my_image.drawLine(0,100,399,300);
+  my_image.drawLine(0,300,399,100);
+
+  /*for( int i=0; i<20; i++ )
   {
-    my_image.setPixel(x,y,rand()%255,rand()%125,rand()%255 );
-  }
+     my_image.drawLine(100,0,300,399);
+  }*/
 
-  //my_image.clear(255,0,0);
-  my_image.save("test_rand2.ppm");
 
-  //my_image.setPixel(500,50,255,255,255);
-
+  my_image.save("test_t.ppm");
   std::cout<<"EXIT_SUCCESS\n";
   return EXIT_SUCCESS;
-
 }

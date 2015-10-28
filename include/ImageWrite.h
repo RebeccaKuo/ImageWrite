@@ -16,6 +16,9 @@ class ImageWrite
                 unsigned char _g, unsigned char _b);
   void clear(unsigned char _r, unsigned char _g,
              unsigned char _b);
+  void drawLine(const int _x1, const int _y1,
+                const int _x2, const int _y2);
+
 
   private:
 

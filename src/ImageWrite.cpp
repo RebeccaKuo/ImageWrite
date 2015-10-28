@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cassert>
 #include <fstream>
+#include <math.h>
 
 ImageWrite::ImageWrite(int _w, int _h)
 {
@@ -17,6 +18,46 @@ ImageWrite::~ImageWrite()
   {
     delete [] m_data;
   }
+}
+
+void ImageWrite::drawLine( const int _x1, const int _y1,
+                           const int _x2, const int _y2 )
+{
+  int x(0), y(0);
+  int delta_x = _x2 - _x1;
+  int delta_y = _y2 - _y1;
+  double delta_err = (double)delta_y/(double)delta_x;
+
+  if(_x1 == _x2) //horzional line
+  {
+    int index_y = fmin(_y1, _y2);
+    for( y = index_y; y<abs(delta_y); y++ )
+    {
+       setPixel(_x1, y, 255,255,255);
+       //std::cout<<_x1<<" "<<y<<std::endl;
+    }
+  }
+  else if( _x2 > _x1 )
+  {
+      for( x=_x1; x<_x1+abs(delta_x); x++ )
+      {
+        y = delta_err*(double)(x - _x1)+_y1;
+        setPixel(x, y, 255,255,255);
+        //std::cout<<x<<" "<<y<<" "<<delta_err<<std::endl;
+      }
+  }
+  else
+  {
+    for( x=_x2; x<_x2+abs(delta_x); x++ )
+    {
+      y = delta_err*(double)(x - _x2)+_y2;
+      setPixel(x, y, 255,255,255);
+      //std::cout<<x<<" "<<y<<" "<<delta_err<<std::endl;
+    }
+  }
+
+  setPixel(_x1, _y1, 255,0,0); //origin: red dot
+  setPixel(_x2, _y2, 0,255,0); //end   : green dot
 }
 
 void ImageWrite::save(const std::string &_fname)
